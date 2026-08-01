@@ -29,7 +29,7 @@ function InvitationLose({ onRetry, onViewInvitation }) {
         </div>
 
         <p className="result-message">
-          El elefantito está a salvo y todavía puede acompañarte a conocer la invitación.
+          La elefantita está a salvo y todavía puede acompañarte a conocer la invitación.
         </p>
 
         <div className="result-buttons">
