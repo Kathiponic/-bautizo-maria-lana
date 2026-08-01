@@ -9,7 +9,7 @@ const GAME_DURATION = 15
 const GROUND_HEIGHT = 74
 const ELEPHANT_SIZE = 105
 const ELEPHANT_SIZE_MOBILE = 92
-const OBSTACLE_SIZE = 48
+const OBSTACLE_SIZE = 44
 
 function Game({ onWin, onLose }) {
   const gameRef = useRef(null)
