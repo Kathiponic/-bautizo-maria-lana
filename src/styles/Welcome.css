@@ -301,4 +301,11 @@
     width: 70px;
     height: 70px;
   }
+  .welcome-subtitle {
+    font-size: 1.35rem;
+}
+
+.welcome-title {
+    font-size: 5.5rem;
+}
 }
