@@ -1,246 +1,66 @@
-.game-screen {
-  position: relative;
-  width: 100vw;
-  height: 100dvh;
-  min-height: 520px;
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #fff9fc 0%,
-      #fdebf3 72%,
-      #f8dfe9 100%
-    );
-
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
-  touch-action: manipulation;
-  user-select: none;
-}
-
-.game-header {
+.game-countdown-overlay {
   position: absolute;
-  top: 22px;
-  left: 50%;
-  z-index: 20;
-
-  width: min(90%, 560px);
-  transform: translateX(-50%);
+  inset: 0;
+  z-index: 100;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: center;
 
-  padding: 12px 18px;
-  border: 1px solid rgba(216, 109, 150, 0.15);
-  border-radius: 18px;
+  padding: 20px;
 
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 8px 24px rgba(173, 94, 126, 0.1);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 245, 250, 0.42);
+  backdrop-filter: blur(2px);
 
-  color: #896d79;
-  font-size: clamp(0.78rem, 2.8vw, 0.95rem);
+  pointer-events: none;
 }
 
-.game-header strong {
-  min-width: 40px;
-  color: #d86d96;
-  font-size: 1.25rem;
+.game-countdown-box {
+  width: min(90%, 430px);
+  padding: 28px 24px;
+
+  border: 1px solid rgba(216, 109, 150, 0.22);
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  box-shadow:
+    0 16px 42px rgba(152, 92, 117, 0.18);
+
   text-align: center;
+
+  animation: countdownAppear 0.35s ease;
 }
 
-.game-elephant {
-  position: absolute;
-  left: max(12%, 25px);
-  z-index: 10;
-
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-
-  pointer-events: none;
-  user-select: none;
-
-  transition: transform 0.08s linear;
-  filter: drop-shadow(0 9px 6px rgba(136, 92, 110, 0.12));
-}
-
-.game-obstacle {
-  position: absolute;
-  z-index: 8;
-
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-
-  pointer-events: none;
-  user-select: none;
-
-  filter: drop-shadow(0 5px 4px rgba(179, 120, 94, 0.15));
-}
-
-.game-cake {
-  position: absolute;
-  z-index: 7;
-
-  width: 100px;
-  height: 125px;
-  object-fit: contain;
-
-  pointer-events: none;
-  user-select: none;
-
-  filter: drop-shadow(0 8px 7px rgba(146, 85, 108, 0.15));
-}
-
-.game-ground {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 5;
-
-  height: 74px;
-
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.5),
-      rgba(246, 214, 227, 0.85)
-    );
-}
-
-.ground-line {
-  width: 100%;
-  height: 4px;
-
-  background: #e9afc4;
-  box-shadow: 0 2px 5px rgba(204, 98, 139, 0.15);
-}
-
-.ground-dots {
-  width: 100%;
-  height: 14px;
-
-  background-image:
-    radial-gradient(
-      circle,
-      rgba(216, 109, 150, 0.28) 1.5px,
-      transparent 1.8px
-    );
-
-  background-size: 28px 14px;
-  animation: moveGround 0.45s linear infinite;
-}
-
-.game-instructions {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  left: 16px;
-  z-index: 20;
-
+.game-countdown-text {
   margin: 0;
 
-  color: #9a7a87;
-  font-size: clamp(0.72rem, 2.5vw, 0.86rem);
-  text-align: center;
-  pointer-events: none;
+  color: #d86d96;
+
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.8rem, 8vw, 4rem);
+  font-weight: 600;
+  line-height: 1.2;
 }
 
-.game-cloud {
-  position: absolute;
-  z-index: 1;
-
-  width: 105px;
-  height: 35px;
-  border-radius: 50px;
-
-  background: rgba(255, 255, 255, 0.72);
-  pointer-events: none;
-
-  animation: moveCloud 14s linear infinite;
-}
-
-.game-cloud::before,
-.game-cloud::after {
-  position: absolute;
-  content: "";
-
-  border-radius: 50%;
-  background: inherit;
-}
-
-.game-cloud::before {
-  top: -23px;
-  left: 18px;
-  width: 48px;
-  height: 48px;
-}
-
-.game-cloud::after {
-  top: -15px;
-  right: 12px;
-  width: 38px;
-  height: 38px;
-}
-
-.game-cloud-one {
-  top: 30%;
-  left: 105%;
-}
-
-.game-cloud-two {
-  top: 54%;
-  left: 120%;
-
-  transform: scale(0.72);
-  animation-delay: -7s;
-  animation-duration: 18s;
-}
-
-@keyframes moveGround {
+@keyframes countdownAppear {
   from {
-    background-position-x: 0;
+    opacity: 0;
+    transform: scale(0.88);
   }
 
   to {
-    background-position-x: -28px;
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-@keyframes moveCloud {
-  from {
-    left: 110%;
+@media (max-width: 600px) {
+  .game-countdown-box {
+    padding: 24px 18px;
   }
 
-  to {
-    left: -150px;
-  }
-}
-
-@media (max-width: 520px) {
-  .game-elephant {
-    left: 28px;
-    width: 120px;
-    height: 92px;
-  }
-
-  .game-obstacle {
-    width: 43px;
-    height: 43px;
-  }
-
-  .game-cake {
-    width: 110px;
-    height: 110px;
-  }
-
-  .game-header {
-    top: 14px;
-    padding: 10px 14px;
+  .game-countdown-text {
+    font-size: clamp(1.7rem, 9vw, 3rem);
   }
 }

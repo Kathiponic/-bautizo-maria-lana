@@ -8,12 +8,12 @@ const EVENT = {
 
   ceremonyTime: "12:00 PM",
   church: "Parroquia de Nuestra Señora del Perpetuo Socorro",
-  churchAddress: " C. Francisco I. Madero 12, Centro, 61149 Cdad. Hidalgo, Mich.",
+  churchAddress: " C. Francisco I. Madero 12, Centro, 61149 Cdad. Hidalgo, Michoacán",
 
   receptionTime: "3:30 PM",
   reception: "Salón de fiestas Quinta San Carlos",
   receptionAddress:
-    "Av. Morelos Ote. Fabrica la Virgen, 61165. Cd. Hidalgo, Mich.",
+    "Av. Morelos Ote. Fabrica la Virgen, 61165. Cd. Hidalgo, Michoacán",
 
   churchMapsUrl: "https://share.google/wahekNUIsPSvsq7JA",
   receptionMapsUrl: "https://www.google.com/maps/place/SALON+DE+FIESTAS+QUINTA+SAN+CARLOS/@19.6816982,-100.5422075,17z/data=!4m6!3m5!1s0x85d2cbb39ca7f229:0x524843a05a2134a6!8m2!3d19.6822785!4d-100.5420853!16s%2Fg%2F11s7phs049?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D",

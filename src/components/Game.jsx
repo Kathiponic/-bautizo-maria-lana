@@ -7,13 +7,15 @@ import pastel from "../assets/pastel.png"
 
 const GAME_DURATION = 15
 const GROUND_HEIGHT = 74
-const ELEPHANT_SIZE = 150
+const ELEPHANT_SIZE = 105
+const ELEPHANT_SIZE_MOBILE = 92
 const OBSTACLE_SIZE = 48
 
 function Game({ onWin, onLose }) {
   const gameRef = useRef(null)
   const animationRef = useRef(null)
   const winTimeoutRef = useRef(null)
+  const countdownTimeoutRef = useRef(null)
 
   const startTimeRef = useRef(null)
   const lastFrameRef = useRef(null)
@@ -30,6 +32,11 @@ function Game({ onWin, onLose }) {
   const finishedRef = useRef(false)
   const finalSequenceRef = useRef(false)
   const elephantReachedCakeRef = useRef(false)
+
+  const [gameStatus, setGameStatus] = useState("preparing")
+  const [countdownText, setCountdownText] = useState(
+    "Toca la pantalla para saltar"
+  )
 
   const [elephantY, setElephantY] = useState(0)
   const [elephantX, setElephantX] = useState(null)
@@ -55,6 +62,7 @@ function Game({ onWin, onLose }) {
 
   const jump = useCallback(() => {
     if (
+      gameStatus !== "playing" ||
       finishedRef.current ||
       finalSequenceRef.current
     ) {
@@ -64,7 +72,72 @@ function Game({ onWin, onLose }) {
     if (elephantYRef.current <= 1) {
       velocityRef.current = 720
     }
+  }, [gameStatus])
+
+  /*
+   * Mensaje de preparación y conteo.
+   */
+
+  useEffect(() => {
+    const sequence = [
+      {
+        text: "Toca la pantalla para saltar",
+        duration: 1800,
+      },
+      {
+        text: "3",
+        duration: 850,
+      },
+      {
+        text: "2",
+        duration: 850,
+      },
+      {
+        text: "1",
+        duration: 850,
+      },
+      {
+        text: "¡Salta!",
+        duration: 700,
+      },
+    ]
+
+    let currentStep = 0
+
+    setCountdownText(sequence[currentStep].text)
+
+    function showNextStep() {
+      currentStep += 1
+
+      if (currentStep >= sequence.length) {
+        setCountdownText("")
+        setGameStatus("playing")
+        return
+      }
+
+      setCountdownText(sequence[currentStep].text)
+
+      countdownTimeoutRef.current = setTimeout(
+        showNextStep,
+        sequence[currentStep].duration
+      )
+    }
+
+    countdownTimeoutRef.current = setTimeout(
+      showNextStep,
+      sequence[currentStep].duration
+    )
+
+    return () => {
+      if (countdownTimeoutRef.current) {
+        clearTimeout(countdownTimeoutRef.current)
+      }
+    }
   }, [])
+
+  /*
+   * Barra espaciadora, flecha arriba o W.
+   */
 
   useEffect(() => {
     function handleKeyDown(event) {
@@ -85,7 +158,13 @@ function Game({ onWin, onLose }) {
     }
   }, [jump])
 
+  /*
+   * Lógica principal del juego.
+   */
+
   useEffect(() => {
+    if (gameStatus !== "playing") return
+
     function gameLoop(timestamp) {
       if (finishedRef.current) return
 
@@ -94,7 +173,9 @@ function Game({ onWin, onLose }) {
         window.innerWidth
 
       const elephantWidth =
-        gameWidth <= 520 ? 92 : ELEPHANT_SIZE
+        gameWidth <= 520
+          ? ELEPHANT_SIZE_MOBILE
+          : ELEPHANT_SIZE
 
       if (!startTimeRef.current) {
         startTimeRef.current = timestamp
@@ -127,7 +208,7 @@ function Game({ onWin, onLose }) {
       setTimeLeft(Math.ceil(remaining))
 
       /*
-       * SALTO Y GRAVEDAD
+       * Salto y gravedad.
        */
 
       if (!finalSequenceRef.current) {
@@ -146,7 +227,7 @@ function Game({ onWin, onLose }) {
       }
 
       /*
-       * CREAR ESTRELLAS
+       * Crear estrellas.
        */
 
       const canCreateObstacle =
@@ -167,7 +248,7 @@ function Game({ onWin, onLose }) {
       }
 
       /*
-       * MOVER ESTRELLAS
+       * Mover estrellas.
        */
 
       const obstacleSpeed = 310
@@ -187,7 +268,7 @@ function Game({ onWin, onLose }) {
       setObstacles([...obstaclesRef.current])
 
       /*
-       * COLISIONES
+       * Colisiones.
        */
 
       if (!finalSequenceRef.current) {
@@ -203,64 +284,75 @@ function Game({ onWin, onLose }) {
         const elephantTop =
           elephantBottom + elephantWidth
 
-        const collision = obstaclesRef.current.some((obstacle) => {
-  /*
-   * La colisión de la estrella usa solamente
-   * el 42 % central de su imagen.
-   */
+        const collision =
+          obstaclesRef.current.some((obstacle) => {
+            /*
+             * Solo se usa la parte central
+             * de la estrella para la colisión.
+             */
 
-  const starHitboxRatio = 0.42
-  const starHitboxSize = OBSTACLE_SIZE * starHitboxRatio
+            const starHitboxRatio = 0.42
+            const starHitboxSize =
+              OBSTACLE_SIZE * starHitboxRatio
 
-  const starMargin =
-    (OBSTACLE_SIZE - starHitboxSize) / 2
+            const starMargin =
+              (OBSTACLE_SIZE - starHitboxSize) / 2
 
-  const obstacleLeft =
-    obstacle.x + starMargin
+            const obstacleLeft =
+              obstacle.x + starMargin
 
-  const obstacleRight =
-    obstacle.x + OBSTACLE_SIZE - starMargin
+            const obstacleRight =
+              obstacle.x +
+              OBSTACLE_SIZE -
+              starMargin
 
-  const obstacleBottom =
-    GROUND_HEIGHT + starMargin
+            const obstacleBottom =
+              GROUND_HEIGHT + starMargin
 
-  const obstacleTop =
-    GROUND_HEIGHT + OBSTACLE_SIZE - starMargin
+            const obstacleTop =
+              GROUND_HEIGHT +
+              OBSTACLE_SIZE -
+              starMargin
 
-  /*
-   * Área de colisión del elefantito.
-   * Se mantiene ligeramente reducida para que
-   * el juego no castigue por las zonas transparentes.
-   */
+            const elephantHitboxMarginX =
+              elephantWidth * 0.18
 
-  const elephantHitboxMarginX =
-    elephantWidth * 0.18
+            const elephantHitboxMarginY =
+              elephantWidth * 0.12
 
-  const elephantHitboxMarginY =
-    elephantWidth * 0.12
+            const elephantHitboxLeft =
+              elephantLeft +
+              elephantHitboxMarginX
 
-  const elephantHitboxLeft =
-    elephantLeft + elephantHitboxMarginX
+            const elephantHitboxRight =
+              elephantRight -
+              elephantHitboxMarginX
 
-  const elephantHitboxRight =
-    elephantRight - elephantHitboxMarginX
+            const elephantHitboxBottom =
+              elephantBottom +
+              elephantHitboxMarginY
 
-  const elephantHitboxBottom =
-    elephantBottom + elephantHitboxMarginY
+            const elephantHitboxTop =
+              elephantTop -
+              elephantHitboxMarginY
 
-  const elephantHitboxTop =
-    elephantTop - elephantHitboxMarginY
+            const horizontalCollision =
+              elephantHitboxRight >
+                obstacleLeft &&
+              elephantHitboxLeft <
+                obstacleRight
 
-  const horizontalCollision =
-    elephantHitboxRight > obstacleLeft &&
-    elephantHitboxLeft < obstacleRight
+            const verticalCollision =
+              elephantHitboxTop >
+                obstacleBottom &&
+              elephantHitboxBottom <
+                obstacleTop
 
-  const verticalCollision =
-    elephantHitboxTop > obstacleBottom &&
-    elephantHitboxBottom < obstacleTop
-
-  return horizontalCollision && verticalCollision
-})
+            return (
+              horizontalCollision &&
+              verticalCollision
+            )
+          })
 
         if (collision) {
           finishGame("lose")
@@ -269,7 +361,8 @@ function Game({ onWin, onLose }) {
       }
 
       /*
-       * MOSTRAR EL PASTEL
+       * Mostrar el pastel después
+       * de la última estrella.
        */
 
       const starsFinished =
@@ -285,7 +378,7 @@ function Game({ onWin, onLose }) {
       }
 
       /*
-       * MOVER EL PASTEL HASTA SU POSICIÓN
+       * Mover el pastel hasta su posición.
        */
 
       if (
@@ -313,7 +406,7 @@ function Game({ onWin, onLose }) {
       }
 
       /*
-       * EL ELEFANTITO AVANZA AL PASTEL
+       * El elefantito avanza al pastel.
        */
 
       if (
@@ -369,7 +462,7 @@ function Game({ onWin, onLose }) {
         clearTimeout(winTimeoutRef.current)
       }
     }
-  }, [finishGame])
+  }, [finishGame, gameStatus])
 
   return (
     <main
@@ -382,11 +475,21 @@ function Game({ onWin, onLose }) {
 
       <header className="game-header">
         <span>
-          ¡Salta y esquiva las estrellas para llegar al pastel!
+          Ayuda al elefantito a llegar al pastel
         </span>
 
         <strong>{timeLeft}</strong>
       </header>
+
+      {countdownText && (
+        <div className="game-countdown-overlay">
+          <div className="game-countdown-box">
+            <p className="game-countdown-text">
+              {countdownText}
+            </p>
+          </div>
+        </div>
+      )}
 
       {elephantX !== null && (
         <img
