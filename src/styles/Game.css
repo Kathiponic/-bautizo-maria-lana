@@ -71,8 +71,8 @@
   position: absolute;
   z-index: 12;
 
-  width: 105px !important;
-  height: 105px !important;
+  width: 180px !important;
+  height: 180px !important;
   max-width: none !important;
   object-fit: contain;
 
@@ -294,8 +294,8 @@
   }
 
   .game-elephant {
-    width: 88px !important;
-    height: 88px !important;
+    width: 160px !important;
+    height: 160px !important;
   }
 
   .game-obstacle {

@@ -7,8 +7,8 @@ import pastel from "../assets/pastel.png"
 
 const GAME_DURATION = 15
 const GROUND_HEIGHT = 74
-const ELEPHANT_SIZE = 105
-const ELEPHANT_SIZE_MOBILE = 92
+const ELEPHANT_SIZE = 180
+const ELEPHANT_SIZE_MOBILE = 160
 const OBSTACLE_SIZE = 44
 
 function Game({ onWin, onLose }) {
