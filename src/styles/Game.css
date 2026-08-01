@@ -1,3 +1,218 @@
+.game-screen {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 520px;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #fff9fc 0%,
+    #fdebf3 72%,
+    #f8dfe9 100%
+  );
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* Encabezado */
+
+.game-header {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  z-index: 30;
+  transform: translateX(-50%);
+
+  width: min(90%, 560px);
+  min-height: 52px;
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  border: 1px solid rgba(216, 109, 150, 0.2);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+
+  color: #806a73;
+  font-size: 0.88rem;
+  box-shadow: 0 8px 24px rgba(173, 94, 126, 0.12);
+}
+
+.game-header span {
+  flex: 1;
+  line-height: 1.35;
+}
+
+.game-header strong {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+  background: #fff0f6;
+  color: #d86d96;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Sprites */
+
+.game-elephant {
+  position: absolute;
+  z-index: 12;
+
+  width: 105px !important;
+  height: 105px !important;
+  max-width: none !important;
+  object-fit: contain;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.game-obstacle {
+  position: absolute;
+  z-index: 10;
+
+  width: 44px !important;
+  height: 44px !important;
+  max-width: none !important;
+  object-fit: contain;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.game-cake {
+  position: absolute;
+  z-index: 9;
+
+  width: 110px !important;
+  height: 110px !important;
+  max-width: none !important;
+  object-fit: contain;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Suelo */
+
+.game-ground {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+
+  height: 74px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45),
+    rgba(246, 214, 227, 0.9)
+  );
+}
+
+.ground-line {
+  width: 100%;
+  height: 4px;
+  background: #e9afc4;
+}
+
+.ground-dots {
+  width: 100%;
+  height: 14px;
+
+  background-image: radial-gradient(
+    circle,
+    rgba(216, 109, 150, 0.3) 1.5px,
+    transparent 1.8px
+  );
+
+  background-size: 28px 14px;
+  animation: moveGround 0.45s linear infinite;
+}
+
+/* Texto inferior */
+
+.game-instructions {
+  position: absolute;
+  right: 12px;
+  bottom: 15px;
+  left: 12px;
+  z-index: 20;
+
+  margin: 0;
+  color: #927985;
+  font-size: 0.75rem;
+  text-align: center;
+
+  pointer-events: none;
+}
+
+/* Nubes */
+
+.game-cloud {
+  position: absolute;
+  z-index: 1;
+
+  width: 105px;
+  height: 35px;
+
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.72);
+
+  pointer-events: none;
+  animation: moveCloud 16s linear infinite;
+}
+
+.game-cloud::before,
+.game-cloud::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  background: inherit;
+}
+
+.game-cloud::before {
+  top: -23px;
+  left: 18px;
+  width: 48px;
+  height: 48px;
+}
+
+.game-cloud::after {
+  top: -15px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+}
+
+.game-cloud-one {
+  top: 31%;
+  left: 110%;
+}
+
+.game-cloud-two {
+  top: 55%;
+  left: 125%;
+  animation-delay: -8s;
+  animation-duration: 20s;
+}
+
+/* Conteo inicial */
+
 .game-countdown-overlay {
   position: absolute;
   inset: 0;
@@ -8,59 +223,101 @@
   justify-content: center;
 
   padding: 20px;
-
-  background: rgba(255, 245, 250, 0.42);
+  background: rgba(255, 245, 250, 0.38);
   backdrop-filter: blur(2px);
 
   pointer-events: none;
 }
 
 .game-countdown-box {
-  width: min(90%, 430px);
-  padding: 28px 24px;
+  width: min(82%, 330px);
+  padding: 18px;
 
-  border: 1px solid rgba(216, 109, 150, 0.22);
-  border-radius: 28px;
+  border: 1px solid rgba(216, 109, 150, 0.24);
+  border-radius: 24px;
 
-  background: rgba(255, 255, 255, 0.94);
-
-  box-shadow:
-    0 16px 42px rgba(152, 92, 117, 0.18);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 14px 36px rgba(152, 92, 117, 0.18);
 
   text-align: center;
-
-  animation: countdownAppear 0.35s ease;
 }
 
 .game-countdown-text {
   margin: 0;
-
   color: #d86d96;
 
-  font-family: "Poppins", sans-serif;
-  font-size: clamp(1.8rem, 8vw, 4rem);
+  font-size: clamp(1.35rem, 5vw, 2.4rem);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
-@keyframes countdownAppear {
+/* Animaciones */
+
+@keyframes moveGround {
   from {
-    opacity: 0;
-    transform: scale(0.88);
+    background-position-x: 0;
   }
 
   to {
-    opacity: 1;
-    transform: scale(1);
+    background-position-x: -28px;
   }
 }
 
+@keyframes moveCloud {
+  from {
+    left: 110%;
+  }
+
+  to {
+    left: -160px;
+  }
+}
+
+/* Celular */
+
 @media (max-width: 600px) {
+  .game-header {
+    top: 10px;
+    width: calc(100% - 20px);
+    min-height: 46px;
+    padding: 8px 10px;
+
+    border-radius: 14px;
+    font-size: 0.7rem;
+  }
+
+  .game-header strong {
+    flex-basis: 36px;
+    width: 36px;
+    height: 30px;
+    font-size: 0.95rem;
+  }
+
+  .game-elephant {
+    width: 88px !important;
+    height: 88px !important;
+  }
+
+  .game-obstacle {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .game-cake {
+    width: 92px !important;
+    height: 92px !important;
+  }
+
   .game-countdown-box {
-    padding: 24px 18px;
+    width: min(84%, 285px);
+    padding: 15px;
   }
 
   .game-countdown-text {
-    font-size: clamp(1.7rem, 9vw, 3rem);
+    font-size: 1.45rem;
+  }
+
+  .game-instructions {
+    font-size: 0.66rem;
   }
 }
