@@ -1,0 +1,67 @@
+.app-shell {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+}
+
+.music-button {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 9999;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(216, 109, 150, 0.3);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  font-size: 1.25rem;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(151, 95, 119, 0.18);
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.music-button:hover {
+  background: white;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 9px 22px rgba(151, 95, 119, 0.24);
+}
+
+.music-button:active {
+  transform: translateY(1px);
+}
+
+.music-button:focus-visible {
+  outline: 3px solid rgba(216, 109, 150, 0.35);
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .music-button {
+    top: 10px;
+    right: 10px;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 1.1rem;
+  }
+}

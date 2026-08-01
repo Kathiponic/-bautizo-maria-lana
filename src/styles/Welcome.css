@@ -1,0 +1,305 @@
+.welcome-screen {
+  position: relative;
+  min-height: 100vh;
+  padding: 24px 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  background: linear-gradient(
+    180deg,
+    #f8dce8 0%,
+    #f7eef4 48%,
+    #eaf4fb 100%
+  );
+}
+
+.welcome-card {
+  position: relative;
+  z-index: 2;
+
+  width: min(100%, 420px);
+  padding: 32px 24px;
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  box-shadow:
+    0 16px 40px rgba(157, 93, 122, 0.16);
+
+  text-align: center;
+}
+
+.welcome-elephant {
+  width: 180px;
+  max-width: 45vw;
+  height: auto;
+
+  margin-bottom: 18px;
+
+  animation: floatElephant 3s ease-in-out infinite;
+}
+
+.welcome-subtitle {
+  max-width: 220px;
+  margin: 0 auto 18px;
+
+  color: #7d6a73;
+
+  font-size: clamp(1rem, 3.8vw, 1.15rem);
+  line-height: 1.55;
+}
+
+.welcome-title {
+  margin: 0;
+
+  color: #d86d96;
+
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(2.4rem, 11vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.welcome-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: min(230px, 75vw);
+  margin: 20px auto 24px;
+}
+
+.welcome-divider > span:not(.welcome-heart) {
+  flex: 1;
+  height: 1px;
+  background: #e8b7c9;
+}
+
+.welcome-heart {
+  color: #d86d96;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.welcome-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+
+  width: 100%;
+}
+
+.music-control-button,
+.start-button {
+  width: min(100%, 300px);
+  min-height: 52px;
+  padding: 13px 24px;
+
+  border-radius: 999px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.music-control-button {
+  border: 1px solid #d86d96;
+
+  background: white;
+  color: #c46288;
+
+  box-shadow:
+    0 7px 16px rgba(216, 109, 150, 0.12);
+}
+
+.music-control-button:hover {
+  background: #fff3f8;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 9px 20px rgba(216, 109, 150, 0.18);
+}
+
+.start-button {
+  border: none;
+
+  background: #d86d96;
+  color: white;
+
+  box-shadow:
+    0 9px 20px rgba(216, 109, 150, 0.3);
+}
+
+.start-button:hover {
+  background: #cc628b;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 11px 24px rgba(216, 109, 150, 0.36);
+}
+
+.music-control-button:active,
+.start-button:active {
+  transform: translateY(1px);
+}
+
+.music-control-button:focus-visible,
+.start-button:focus-visible {
+  outline: 3px solid rgba(216, 109, 150, 0.3);
+  outline-offset: 3px;
+}
+
+/* NUBES */
+
+.cloud {
+  position: absolute;
+  z-index: 1;
+
+  width: 180px;
+  height: 60px;
+
+  border-radius: 100px;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  pointer-events: none;
+
+  animation-name: floatCloud;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  position: absolute;
+  content: "";
+
+  border-radius: 50%;
+  background: inherit;
+}
+
+.cloud::before {
+  top: -30px;
+  left: 25px;
+
+  width: 70px;
+  height: 70px;
+}
+
+.cloud::after {
+  top: -45px;
+  right: 25px;
+
+  width: 90px;
+  height: 90px;
+}
+
+.cloud-one {
+  top: 12%;
+  right: -240px;
+
+  animation-duration: 34s;
+  animation-delay: 0s;
+}
+
+.cloud-two {
+  top: 46%;
+  right: -380px;
+
+  transform: scale(0.78);
+
+  animation-duration: 42s;
+  animation-delay: -15s;
+}
+
+.cloud-three {
+  top: 76%;
+  right: -520px;
+
+  transform: scale(1.08);
+
+  animation-duration: 50s;
+  animation-delay: -28s;
+}
+
+@keyframes floatElephant {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatCloud {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: calc(-100vw - 800px) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .welcome-screen {
+    padding: 40px;
+  }
+
+  .welcome-card {
+    padding: 44px 36px;
+  }
+}
+
+@media (max-width: 420px) {
+  .welcome-card {
+    padding: 28px 18px;
+  }
+
+  .welcome-elephant {
+    width: 105px;
+  }
+
+  .music-control-button,
+  .start-button {
+    min-height: 50px;
+    font-size: 0.94rem;
+  }
+
+  .cloud {
+    width: 140px;
+    height: 48px;
+  }
+
+  .cloud::before {
+    top: -24px;
+    left: 20px;
+
+    width: 56px;
+    height: 56px;
+  }
+
+  .cloud::after {
+    top: -35px;
+    right: 20px;
+
+    width: 70px;
+    height: 70px;
+  }
+}
