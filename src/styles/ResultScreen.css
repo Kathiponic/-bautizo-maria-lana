@@ -211,3 +211,15 @@
   color: #c95f89;
   box-shadow: 0 7px 16px rgba(216, 109, 150, 0.15);
 }
+@media (max-width: 600px) {
+
+  .result-title{
+      font-size: 3.9rem;
+  }
+
+  .result-message{
+      font-size: 1.3rem;
+      line-height: 1.5;
+  }
+
+}
