@@ -36,7 +36,7 @@
 
 .welcome-elephant {
   width: 180px;
-  max-width: 45vw;
+  max-width: none;
   height: auto;
 
   margin-bottom: 18px;
@@ -267,13 +267,14 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 600px) {
   .welcome-card {
     padding: 28px 18px;
   }
 
   .welcome-elephant {
     width: 145px;
+    max-width: 60vw;
   }
 
   .music-control-button,
@@ -290,7 +291,6 @@
   .cloud::before {
     top: -24px;
     left: 20px;
-
     width: 56px;
     height: 56px;
   }
@@ -298,7 +298,6 @@
   .cloud::after {
     top: -35px;
     right: 20px;
-
     width: 70px;
     height: 70px;
   }
