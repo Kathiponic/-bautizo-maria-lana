@@ -7,7 +7,7 @@ const EVENT = {
   date: "Domingo 27 de septiembre del 2026",
 
   ceremonyTime: "12:00 PM",
-  church: "Parroquia de Nuestra Señora del Perpetuo Socorro",
+  church: "Parroquia Virgen del Rosario",
   churchAddress: " C. Francisco I. Madero 12, Centro, 61149 Cdad. Hidalgo, Michoacán",
 
   receptionTime: "3:30 PM",
@@ -15,7 +15,7 @@ const EVENT = {
   receptionAddress:
     "Av. Morelos Ote. Fabrica la Virgen, 61165. Cd. Hidalgo, Michoacán",
 
-  churchMapsUrl: "https://share.google/wahekNUIsPSvsq7JA",
+  churchMapsUrl: "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x85d2ca2dd047bfb5:0x5513c1bbda9eee0f?entry=s&sa=X&ved=2ahUKEwieotiQ67-WAxUmG9AFHcoxFfsQ4kB6BAgEEAA&hl=es",
   receptionMapsUrl: "https://www.google.com/maps/place/SALON+DE+FIESTAS+QUINTA+SAN+CARLOS/@19.6816982,-100.5422075,17z/data=!4m6!3m5!1s0x85d2cbb39ca7f229:0x524843a05a2134a6!8m2!3d19.6822785!4d-100.5420853!16s%2Fg%2F11s7phs049?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D",
 
   whatsappUrl:
