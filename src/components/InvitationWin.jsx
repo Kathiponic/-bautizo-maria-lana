@@ -8,7 +8,7 @@ const EVENT = {
 
   ceremonyTime: "12:00 PM",
   church: "Parroquia Virgen del Rosario",
-  churchAddress: " C. Francisco I. Madero 12, Centro, 61149 Cdad. Hidalgo, Michoacán",
+  churchAddress: "Av. Morelos Ote. 283, Fabrica la Virgen, 61165 Cd. Hidalgo, Michoacán",
 
   receptionTime: "3:30 PM",
   reception: "Salón de fiestas Quinta San Carlos",
