@@ -6,7 +6,7 @@ const EVENT = {
   babyName: "María Lana Martínez Hernández",
   date: "Domingo 27 de septiembre del 2026",
 
-  ceremonyTime: "12:00 PM",
+  ceremonyTime: "2:00 PM",
   church: "Parroquia Virgen del Rosario",
   churchAddress: "Av. Morelos Ote. 283, Fabrica la Virgen, 61165 Cd. Hidalgo, Michoacán",
 
